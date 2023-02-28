@@ -1,0 +1,133 @@
+<nav class="navbar navbar-expand-lg navbar-light sticky-top bg-light">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#"><img src="assets/images/search.svg" width="70" alt=""></a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<!-- <li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" [routerLink]="['/']">   <span class="sr-only">(current)</span></a>
+				</li> -->
+				<!-- <li class="nav-item" style="margin-right: 10px;">
+					<a class="nav-link" [routerLink]="['/search']">  -->
+            <!--i class="fas fa-search"></i-->
+           <!-- </a>
+				</li> -->
+
+			</ul>
+		        <span *ngIf="connect" class="navbar-text" >
+		          <a class="btn btn-sm btn-outline-secondary " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style="margin-right: 10px;">
+		            <i class="fas fa-user"></i> {{username}}
+		          </a>
+		          
+		        </span>
+			<span class="navbar-text" >
+				<a  *ngIf="!connect" [routerLink]="['/sign-in']" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px;"><i class="fas fa-sign-in"></i> Connexion</a>
+        <a  *ngIf="connect" (click)="logout()" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px;"><i class="fas fa-sign-in"></i> Déconnexion</a>
+				<a *ngIf="!connect"[routerLink]="['/sign-up']" class="btn btn-sm btn-outline-secondary" style="margin-right: 10px;"><i class="fas fa-user-plus"></i> Inscription</a>
+			</span>
+		</div>
+	</div>
+</nav>
+
+
+
+    <div class="row" id="center">
+        <div class="col-sm-9">
+            <div class="container">
+                <div class="container">
+          <div class="card">
+            <form [formGroup]="form">
+            <div class="card-body" id="card-body-search">
+              
+                <div class="input-group" >
+                    <div class="form-outline" id="search">
+                      <input type="search" id="form1" formControlName="query" class="form-control" placeholder="Recherche"  />
+                    </div>
+                    <button type="button" class="btn "  (click)="recherche()" ngModel={{valueSearch}} style="background-color: #1DB3A0;">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                
+            </div>
+          </form>
+            <div class="card w-100" *ngFor="let article of data; let i=index">
+                <div class="card-body">
+                  <h5 class="card-title">{{article.titreArticle}}</h5>
+                  <p class="card-text">{{article.resumeArticle}}</p>
+                  <a href={{article.urlArticle}} class="btn" style="background-color: #1DB3A0;">Voir Plus</a>
+                </div>
+              </div>
+              
+             </div>
+             
+          </div>
+            </div>
+        </div>
+     
+        <div  class="col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  
+                  <div class="carousel-item active">
+                    <img  src="assets/images/tech.jpeg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5 style="color: rgb(243, 236, 236);">Technologie </h5>
+                    
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img  src="assets/images/polit.jpeg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5 style="color: rgb(243, 236, 236);">Politique </h5>
+                    
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img  src="assets/images/eco.jpeg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                      <h5 style="color: rgb(243, 236, 236);">Economie </h5>
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <p *ngIf="!connect" class="card-text">Pour plus de contenu, veuillez de vous inscrire.</p>
+              <a *ngIf="!connect"  href="#" class="btn btn-primary" [routerLink]="['/sign-up']" style="background-color: #1DB3A0;" >Nous joindre</a>
+
+              <p *ngIf="connect" class="card-text">Pour plus de contenu, veuillez renseigner vos centre d'intéret.</p>
+              <a *ngIf="connect" type="button" style="background-color: #1DB3A0; color: white;"   class="btn"  (click)="vueInteret()">
+                + centre d'intéret
+              </a>
+              
+              <div  *ngIf="interet"  >
+                <div class="">
+                  <div class="form-group">
+                    <label></label>
+                    <div *ngFor="let ci of interets" class="form-check" >
+                      <input class="form-check-input" type="checkbox" [value]="ci"  [(ngModel)]="selectedInteret[ci]">
+                      <label class="form-check-label">{{ ci }}</label>
+                    </div>
+                    <a type="button" class="btn" style="background-color: red; color: white;" (click)="update()">valider</a>
+                  </div>
+                
+                  
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+  
+
+  
+  
+  
+   
+  
+  
